@@ -1,0 +1,22 @@
+# Definição de variáveis
+PROJECT_NAME = produto-api
+ENTRY_POINT = index.js
+
+# Inicializar o projeto (roda npm install para instalar dependências)
+install:
+	npm install
+
+# Iniciar o servidor (usando o script 'start' definido no package.json)
+start:
+	npm start
+
+# Teste de exemplo (atualmente vazio, mas pode ser expandido)
+test:
+	npm test
+
+# Limpeza (remove a pasta node_modules)
+clean:
+	rm -rf node_modules
+
+# Comando padrão
+.PHONY: install start test clean
