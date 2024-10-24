@@ -1,18 +1,28 @@
-const { Sequelize } = require('sequelize');
-require('dotenv').config(); // Carrega as variáveis do arquivo .env
+// Carregar variáveis de ambiente do arquivo .env
+require('dotenv').config();
 
-// Configurar a URL de conexão ao PostgreSQL usando variáveis de ambiente
-const sequelize = new Sequelize(`postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`, {
-  dialect: 'postgres',
+const { Client } = require('pg');
+
+require('dotenv').config();
+
+console.log('DB_USERNAME:', process.env.DB_USERNAME);
+console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
+
+// Configuração usando variáveis de ambiente
+const client = new Client({
+  user: process.env.DB_USERNAME,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Conexão ao banco de dados realizada com sucesso.');
-  })
-  .catch((err) => {
-    console.error('Não foi possível conectar ao banco de dados:', err);
-  });
+client.connect((err) => {
+  if (err) {
+    console.error('Erro ao conectar ao banco de dados:', err.stack);
+  } else {
+    console.log('Conectado ao banco de dados');
+  }
+});
 
-module.exports = sequelize;
+module.exports = client;

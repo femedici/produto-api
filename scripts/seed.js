@@ -1,7 +1,6 @@
-require('dotenv').config(); // Carrega as variáveis do arquivo .env
-const sequelize = require('./config/database'); // Ajuste o caminho para o seu arquivo de conexão
-const Produto = require('./models/produto'); // Ajuste o caminho para o seu modelo de Produto
+const client = require('../config/database');
 
+// Produtos a serem adicionados
 const produtos = [
   { descricao: 'Produto 1', preco: 10.00, estoque: 100, data: new Date() },
   { descricao: 'Produto 2', preco: 20.00, estoque: 200, data: new Date() },
@@ -10,26 +9,35 @@ const produtos = [
   { descricao: 'Produto 5', preco: 50.00, estoque: 500, data: new Date() },
 ];
 
+// Função para criar a tabela e inserir os produtos
 const seedDatabase = async () => {
   try {
-    await sequelize.authenticate(); // Conecta ao banco de dados
-    console.log('Conexão ao banco de dados realizada com sucesso.');
+    // Criação da tabela 'produtos'
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS produtos (
+        id SERIAL PRIMARY KEY,
+        descricao VARCHAR(255) NOT NULL,
+        preco DECIMAL NOT NULL,
+        estoque INTEGER NOT NULL,
+        data TIMESTAMP WITH TIME ZONE
+      );
+    `);
 
-    // Sincroniza o modelo com o banco de dados (se necessário)
-    await Produto.sync();
-
-    // Cria os produtos no banco de dados
+    // Inserir os produtos
     for (const produto of produtos) {
-      await Produto.create(produto);
-      console.log(`Produto criado: ${produto.descricao}`);
+      await client.query(
+        'INSERT INTO produtos (descricao, preco, estoque, data) VALUES ($1, $2, $3, $4)',
+        [produto.descricao, produto.preco, produto.estoque, produto.data]
+      );
+      console.log(`Produto ${produto.descricao} criado com sucesso.`);
     }
 
     console.log('Todos os produtos foram criados com sucesso.');
   } catch (error) {
-    console.error('Erro ao conectar ou criar os produtos:', error);
+    console.error('Erro ao popular o banco de dados:', error);
   } finally {
-    await sequelize.close(); // Fecha a conexão
+    client.end(); // Encerrar a conexão com o banco de dados
   }
 };
 
-seedDatabase();
+module.exports = seedDatabase;

@@ -1,15 +1,21 @@
 const express = require('express');
-const produtoRoutes = require('./routes/produtoRoutes');
+const seedDatabase = require('./scripts/seed'); // O script para popular o banco
+const produtoRoutes = require('./produto'); // Importa as rotas do produto
+
 const app = express();
-
-// Middleware para processar JSON
 app.use(express.json());
+app.use('/', produtoRoutes); // Usa as rotas de produtos com o prefixo /produtos
 
-// Usar as rotas de produtos
-app.use('/api', produtoRoutes);
+// Iniciar o servidor e popular o banco de dados
+const startApp = async () => {
+  try {
+    await seedDatabase(); // Executa o seed ao iniciar
+    app.listen(3000, () => {
+      console.log('Servidor rodando na porta 3000');
+    });
+  } catch (error) {
+    console.error('Erro ao iniciar o aplicativo:', error);
+  }
+};
 
-// Iniciar o servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+startApp();
