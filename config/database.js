@@ -1,6 +1,8 @@
 const { Sequelize } = require('sequelize');
+require('dotenv').config(); // Carrega as variáveis do arquivo .env
 
-const sequelize = new Sequelize('postgres://postgres:210371@localhost:5432/produtos', {
+// Configurar a URL de conexão ao PostgreSQL usando variáveis de ambiente
+const sequelize = new Sequelize(`postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`, {
   dialect: 'postgres',
 });
 
