@@ -2,11 +2,11 @@ const client = require('../config/database');
 
 // Produtos a serem adicionados
 const produtos = [
-  { descricao: 'Produto 1', preco: 10.00, estoque: 100, data: new Date() },
-  { descricao: 'Produto 2', preco: 20.00, estoque: 200, data: new Date() },
-  { descricao: 'Produto 3', preco: 30.00, estoque: 300, data: new Date() },
-  { descricao: 'Produto 4', preco: 40.00, estoque: 400, data: new Date() },
-  { descricao: 'Produto 5', preco: 50.00, estoque: 500, data: new Date() },
+  { descricao: 'Produto 1', preco: 10.00, estoque: 10, data: new Date() },
+  { descricao: 'Produto 2', preco: 20.00, estoque: 20, data: new Date() },
+  { descricao: 'Produto 3', preco: 30.00, estoque: 30, data: new Date() },
+  { descricao: 'Produto 4', preco: 40.00, estoque: 40, data: new Date() },
+  { descricao: 'Produto 5', preco: 50.00, estoque: 50, data: new Date() },
 ];
 
 // Função para criar a tabela e inserir os produtos

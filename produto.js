@@ -3,9 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const { Client } = require('pg');
 
-const router = express.Router(); // Usar o roteador do Express
+const router = express.Router(); 
 
-// Configuração do cliente PostgreSQL usando variáveis de ambiente
 const client = new Client({
   user: process.env.DB_USERNAME,
   host: process.env.DB_HOST,
@@ -19,7 +18,7 @@ client.connect((err) => {
   if (err) {
     console.error('Erro ao conectar ao banco de dados:', err.stack);
   } else {
-    console.log('Conectado ao banco de dados');
+    console.log('Conectado ao banco de dados 2');
   }
 });
 
