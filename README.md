@@ -1,6 +1,10 @@
 # Produto API 
 > Aplicação desenvolvida para a matéria de Desenvolvimento de Aplicativos
 
+## Pré-requisitos
+- [NodeJS](https://nodejs.org/en)
+- [Postgree SQL](https://www.postgresql.org/download/)
+  
 ## Descrição
 A aplicação apresenta uma implementação do backend com controles para um produto. O controle para o produto apresenta as seguintes operações:
 - Incerir um produto
@@ -19,7 +23,7 @@ As tecnologias utilizadas nessa aplicação foram: **Node.js - Express - Postegr
 
 ## Instalação
   
-- **Configuração do ambiente**
+### **Configuração do ambiente**
 
 Clone o repositório com o seguinte comando:
 
@@ -40,7 +44,7 @@ Se você rodar o sistema em modo local (servidores backend e frontend na mesma m
 
 **Importante!** Altere as informações no arquivo  `.env` com as configurações do seu ambiente de banco de dados **Postgree**
 
-- **Configuração Postgree**
+### **Configuração Postgree**
 
 É necessário para o funcionamento da aplicação, a criação de uma Database nomeada preferencialmente 'produtos' (caso nao opte por esse nome, pode ser alterado no .env). 
 Junto com a configuração do login e senha de acesso ao postgree, que são referenciados novamente no arquivo  `.env` 
