@@ -16,7 +16,7 @@ client.connect((err) => {
   if (err) {
     console.error('Erro ao conectar ao banco de dados:', err.stack);
   } else {
-    console.log('Conectado ao banco de dados 1');
+    console.log('Conectado ao banco de dados');
   }
 });
 
