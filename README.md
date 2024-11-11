@@ -46,7 +46,20 @@ Se você rodar o sistema em modo local (servidores backend e frontend na mesma m
 
 ### **Configuração Postgree**
 
-É necessário para o funcionamento da aplicação, a criação de uma Database nomeada preferencialmente 'produtos' (caso nao opte por esse nome, pode ser alterado no .env). 
+É necessário para o funcionamento da aplicação, a criação de uma Database nomeada preferencialmente 'produtos'. Então dentro da database criada, crie uma Tabela com o seguinte comando:
+
+```bash
+CREATE TABLE produtos (
+        id SERIAL PRIMARY KEY,
+        descricao VARCHAR(255) NOT NULL,
+        preco DECIMAL (10,2) NOT NULL,
+        estoque INTEGER NOT NULL,
+        data DATE
+      );
+```
+
+*IMPORTANTE!* Sem a criação da tabela os endpoints não funcionaram.
+
 Junto com a configuração do login e senha de acesso ao postgree, que são referenciados novamente no arquivo  `.env` 
 
 
